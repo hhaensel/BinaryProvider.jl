@@ -366,7 +366,7 @@ end
 
 """
     write_deps_file(depsjl_path::AbstractString, products::Vector{Product};
-                    verbose::Bool = false)
+                    verbose::Bool = false, isolate::Bool = false) where {P <: Product}
 
 Generate a `deps.jl` file that contains the variables referred to by the
 products within `products`.  As an example, running the following code:
@@ -395,7 +395,7 @@ package load time, and if an error is discovered, package loading will fail,
 asking the user to re-run `Pkg.build("package_name")`.
 """
 function write_deps_file(depsjl_path::AbstractString, products::Vector{P};
-                         verbose::Bool=false, isolate::Bool=true) where {P <: Product}
+                         verbose::Bool=false, isolate::Bool = false) where {P <: Product}
     # helper function to escape paths
     escape_path = path -> replace(path, "\\" => "\\\\")
 
